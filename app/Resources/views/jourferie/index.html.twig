@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Jourferies list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Libelle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jourFerie in jourFeries %}
+            <tr>
+                <td><a href="{{ path('jourferie_show', { 'id': jourFerie.id }) }}">{{ jourFerie.id }}</a></td>
+                <td>{% if jourFerie.date %}{{ jourFerie.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ jourFerie.libelle }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('jourferie_show', { 'id': jourFerie.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('jourferie_edit', { 'id': jourFerie.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('jourferie_new') }}">Create a new jourFerie</a>
+        </li>
+    </ul>
+{% endblock %}

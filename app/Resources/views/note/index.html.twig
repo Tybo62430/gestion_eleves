@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class='container'>
+        <h1>Notes list</h1>
+
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th>Etudiant</th>  
+                    <th>Note</th>
+                    <th>Matiere</th>
+                    <th>Commentaire</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for note in notes %}
+                    <tr>  
+                        <td>{{ note.etudiant.nom ~' '~ note.etudiant.prenom }}</td>
+                        <td>{{ note.note }}</td>
+                        <td>{{ note.matiere.libelle }}</td>
+                        <td>{{ note.commentaire }}</td>
+                        <td>{% if note.date %}{{ note.date|date('Y-m-d') }}{% endif %}</td>                         
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('note_show', { 'id': note.id }) }}">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('note_edit', { 'id': note.id }) }}">edit</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('note_new') }}">Create a new note</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

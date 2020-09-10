@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class='container'>
+
+        <h1>Etudiants list</h1>
+
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Datedenaissance</th>
+                    <th>Adresse</th>
+                    <th>Codepostal</th>
+                    <th>Ville</th>
+                    <th>Commentaire</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for etudiant in etudiants %}
+                    <tr>
+                        <td><a href="{{ path('etudiant_show', { 'id': etudiant.id }) }}">{{ etudiant.id }}</a></td>
+                        <td>{{ etudiant.nom }}</td>
+                        <td>{{ etudiant.prenom }}</td>
+                        <td>{% if etudiant.dateDeNaissance %}{{ etudiant.dateDeNaissance|date('Y-m-d') }}{% endif %}</td>
+                        <td>{{ etudiant.adresse }}</td>
+                        <td>{{ etudiant.codePostal }}</td>
+                        <td>{{ etudiant.ville }}</td>
+                        <td>{{ etudiant.commentaire }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('etudiant_show', { 'id': etudiant.id }) }}">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('etudiant_edit', { 'id': etudiant.id }) }}">edit</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('etudiant_new') }}">Create a new etudiant</a>
+            </li>
+        </ul>
+    </div>
+            
+    {#<div class ="container">
+        {% for jourferie in joursferies%}
+            <p>
+            {{ jourferie[0] ~ ' ' ~ jourferie[1] }}
+            </p>
+        {% endfor %}
+    </div>#}
+{% endblock %}
